@@ -5,12 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.check24.film.model.Film;
-import com.check24.user.model.User;
 
 import lombok.Getter;
 import lombok.Setter;

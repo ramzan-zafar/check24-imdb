@@ -41,12 +41,13 @@ public class UserController {
 
 	}
 
+	@ApiOperation(value = "Register User", produces = "application/json")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful operation", response = String.class),
+			@ApiResponse(code = 400, message = "Bad Request - Invalid request", responseContainer = "List") })
 	@PostMapping(value = "/user", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto, UriComponentsBuilder ucBuilder) {
-
+	public ResponseEntity<String> registerUser(@Valid @RequestBody UserDto userDto, UriComponentsBuilder ucBuilder) {
 		userService.saveUser(userDto);
-
 		return ResponseEntity.ok().body("User registered successfully!");
 	}
 

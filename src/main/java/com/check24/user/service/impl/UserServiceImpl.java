@@ -30,18 +30,18 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
-	
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    RoleRepository roleRepository;
+	@Autowired
+	AuthenticationManager authenticationManager;
 
-    @Autowired
-    PasswordEncoder encoder;
+	@Autowired
+	RoleRepository roleRepository;
 
-    @Autowired
-    JwtProvider jwtProvider;
+	@Autowired
+	PasswordEncoder encoder;
+
+	@Autowired
+	JwtProvider jwtProvider;
 
 	@Override
 	public List<UserDto> findAllUsers() {
@@ -51,13 +51,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto saveUser(UserDto userDto) {
-		
+
 		if (existsByUsername(userDto.getUsername())) {
 			throw new ResourceConflictException(userDto.getUsername(), "User with this username already exist");
 		}
 
 		User user = userMapper.fromDto(userDto);
-		
+
 		user.setPassword(encoder.encode(user.getPassword()));
 
 		userRepository.save(user);
@@ -72,6 +72,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Boolean existsByUsername(String username) {
-		return userRepository.existsByUsername(username);		
+		return userRepository.existsByUsername(username);
 	}
 }

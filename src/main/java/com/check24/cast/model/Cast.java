@@ -1,4 +1,4 @@
-package com.check24.filmgenre.model;
+package com.check24.cast.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.check24.film.model.Film;
-import com.check24.genre.model.Genre;
+import com.check24.actor.model.Actor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,17 +20,21 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name="FILM_GENRE")
-public class FilmGenre{
+@Table(name="CAST")
+public class Cast {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="genreId")
-	private Genre genre;
+	@JoinColumn(name="actorId")
+	private Actor actor;
 	
 	@ManyToOne
 	@JoinColumn(name="filmId")
 	private Film film;
+	
+	@Column(name="role")
+	private String roleName;
+	
 }

@@ -13,9 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.check24.rating.model.Rating;
-import com.check24.rating.filmdirector.FilmDirector;
-import com.check24.rating.cast.Cast;
-import com.check24.rating.filmgenre.FilmGenre;
+import com.check24.cast.model.Cast;
+import com.check24.filmdirector.model.FilmDirector;
+import com.check24.filmgenre.model.FilmGenre;
 
 import lombok.Getter;
 import lombok.Setter;

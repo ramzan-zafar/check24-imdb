@@ -1,6 +1,5 @@
 package com.check24.filmdirector.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.check24.director.model.Director;
 import com.check24.film.model.Film;
-import com.check24.user.model.Director;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="FILM_DIRECTOR")
-public class Rating {
+public class FilmDirector {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
