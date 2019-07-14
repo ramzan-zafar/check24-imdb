@@ -1,6 +1,6 @@
 package com.check24.common.model.transport.rating.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.annotation.Validated;
@@ -19,10 +19,10 @@ import lombok.ToString;
 @ApiModel(value = "Rating")
 public class RatingDto {
 
-	@NotBlank
+	@NotNull(message = "Please enter filmId")
 	private Long filmId;
 
-	@NotBlank
+	@NotNull(message = "Please enter rating")
 	@Range(min=1, max=5)
 	private Integer rating;
 }
