@@ -13,8 +13,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class FilmDto {
 
+public class FilmDto {
 	private Long filmId;
 
 	@NotBlank
