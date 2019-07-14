@@ -23,5 +23,11 @@ public class FilmDto {
 	private Integer durationInMins;
 	
 	private Double averageRating;
+	
+	private List<String> cast;
+	
+	private List<String> directors;
+	
+	private List<String> genres;
 	 
 }

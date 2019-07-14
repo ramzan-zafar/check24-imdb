@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.check24.rating.model.Rating;
+import com.check24.rating.filmdirector.FilmDirector;
+import com.check24.rating.cast.Cast;
+import com.check24.rating.filmgenre.FilmGenre;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,5 +44,13 @@ public class Film {
 	
 	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
 	private Set<Rating> rating;
-		
+	
+	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	private Set<FilmDirector> directors;
+	
+	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	private Set<FilmGenre> genres;
+
+    @OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	private Set<Cast> cast;	
 }

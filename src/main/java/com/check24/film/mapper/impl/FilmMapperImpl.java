@@ -31,12 +31,27 @@ public class FilmMapperImpl implements FilmMapper {
 		filmDto.setYearOfRelease(film.getYearOfRelease());
 		filmDto.setDurationInMins(film.getDurationInMins());
 		filmDto.setAverageRating(calculateAverageRating(film));
+		filmDto.setCast(fetchFilmCast(film));
+		filmDto.setDirectors(fetchFilmDirectors(film));
+		filmDto.setGenres(fetchFilmGenres(film));
 						
 		return filmDto;
 	}
 
 	private Double calculateAverageRating(Film film) {
 		return film.getRating().stream().map(r-> r.getRating()).collect(Collectors.averagingInt(Integer::intValue));
+	}
+	
+	private List<String> fetchFilmCast(Film film) {
+		return film.getCast().stream().map(c-> c.getActor().getName()).collect(Collectors.toList());
+	}
+	
+	private List<String> fetchFilmDirectors(Film film) {
+		return film.getDirectors().stream().map(d-> d.getDirector().getName()).collect(Collectors.toList());
+	}
+	
+	private List<String> fetchFilmGenres(Film film) {
+		return film.getGenres().stream().map(c-> c.getGenre().getName()).collect(Collectors.toList());
 	}
 
 	
