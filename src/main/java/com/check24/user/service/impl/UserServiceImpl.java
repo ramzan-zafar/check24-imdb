@@ -2,6 +2,7 @@ package com.check24.user.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.check24.common.model.transport.user.dto.UserDto;
 import com.check24.exception.ResourceConflictException;
+import com.check24.film.model.Film;
 import com.check24.role.repository.RoleRepository;
 import com.check24.security.jwt.JwtProvider;
 import com.check24.user.mapper.UserMapper;
@@ -46,7 +48,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> findAllUsers() {
 
-		return null;
+		List<User> users = userRepository.findAll();
+
+		return users.stream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
+
 	}
 
 	@Override
