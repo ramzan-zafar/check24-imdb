@@ -1,5 +1,6 @@
 package com.check24.film.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -7,8 +8,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.check24.common.model.transport.film.dto.FilmDto;
 import com.check24.common.model.transport.rating.dto.RatingDto;
@@ -65,15 +66,14 @@ public class FilmServiceImpl implements FilmService {
 
 			User user = getUserFromSecurityContext();
 
-			Set<Rating> existingRating = film.get().getRating();
+			Rating userRating = populateRating(ratingDto, film, user);
 
-			Rating userRating = new Rating();
-			userRating.setUser(user);
-			userRating.setFilm(film.get());
-			userRating.setRating(ratingDto.getRating());
-			existingRating.add(userRating);
+			if (CollectionUtils.isEmpty(film.get().getRating())) {
+				Set<Rating> rating = new HashSet<>();
+				film.get().setRating(rating);
+			}
 
-			film.get().setRating(existingRating);
+			film.get().getRating().add(userRating);
 
 			filmRepository.save(film.get());
 		} else {
@@ -84,10 +84,18 @@ public class FilmServiceImpl implements FilmService {
 		return filmMapper.toDto(film.get());
 	}
 
+	private Rating populateRating(RatingDto ratingDto, Optional<Film> film, User user) {
+		Rating userRating = new Rating();
+		userRating.setUser(user);
+		userRating.setFilm(film.get());
+		userRating.setRating(ratingDto.getRating());
+		return userRating;
+	}
+
 	private User getUserFromSecurityContext() {
 		UserPrinciple userDetails = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
-		User user = userRepository.findById(String.valueOf(userDetails.getId())).get();
+		User user = userRepository.findById(userDetails.getId()).get();
 		return user;
 	}
 

@@ -23,8 +23,8 @@ import lombok.ToString;
 @Table(name="RATING")
 public class Rating {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="userId")
@@ -35,6 +35,6 @@ public class Rating {
 	private Film film;
 	
 	@Column(name="rating")
-	private int rating;
+	private Integer rating;
 	
 }

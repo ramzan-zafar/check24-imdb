@@ -42,15 +42,15 @@ public class Film {
 	@Column(name="duration_in_mins")
 	private Integer durationInMins;
 	
-	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
 	private Set<Rating> rating;
 	
-	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
 	private Set<FilmDirector> directors;
 	
-	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
 	private Set<FilmGenre> genres;
 
-    @OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @OneToMany(mappedBy="film",fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
 	private Set<Cast> cast;	
 }
