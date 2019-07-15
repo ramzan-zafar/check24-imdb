@@ -1,10 +1,12 @@
 package com.check24.film.mapper.impl;
 
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.check24.cast.model.Cast;
 import com.check24.common.model.transport.film.dto.FilmDto;
 import com.check24.film.mapper.FilmMapper;
 import com.check24.film.model.Film;
@@ -43,11 +45,11 @@ public class FilmMapperImpl implements FilmMapper {
 	}
 	
 	private List<String> fetchFilmCast(Film film) {
-		return film.getCast().stream().map(c-> c.getActor().getName()).collect(Collectors.toList());
+		return film.getCast().stream().map((Cast  c)-> c.getActor().getLastName()).collect(Collectors.toList());
 	}
 	
 	private List<String> fetchFilmDirectors(Film film) {
-		return film.getDirectors().stream().map(d-> d.getDirector().getName()).collect(Collectors.toList());
+		return film.getDirectors().stream().map(d-> d.getDirector().getLastName()).collect(Collectors.toList());
 	}
 	
 	private List<String> fetchFilmGenres(Film film) {
